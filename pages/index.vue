@@ -19,7 +19,7 @@ export default {
                 name: 'description',
                 content: 'This is a homepage!',
                 hid: 'description'
-            }]
+            }],
         }
     },
     data () {
