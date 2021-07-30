@@ -9,6 +9,17 @@
         <img src="/images/star.svg" width="20px" height="20px"> {{ home.reviewValue }} <br>
         {{ home.guests }} guests, {{ home.bedrooms }} rooms, {{ home.beds }} beds, {{home.bathroom}} bath <br>
         <div style="height: 800px; width: 800px;" ref="map"></div>
+        <div v-for="review in reviews" :key="review.objectID">
+            <img :src="review.reviewer.image"> <br>
+            {{ review.reviewer.name }} <br>
+            {{ formateDate(review.date) }} <br>
+            <short-text :text="review.comment" :target="150" /> <br>
+        </div>
+        <img :src="user.image"> <br>
+        {{ user.name }} <br>
+        {{ formateDate(user.joined) }} <br>
+        {{ user.reviewCount }} <br>
+        {{ user.description }} <br>
     </div>
 </template>
 
@@ -21,17 +32,30 @@ export default {
             title: this.home.title,
         }
     },
-    data() {
-        return {
-            home: {}
-        }
-    },
     mounted() {
         this.$maps.showMap(this.$refs.map, this.home._geoloc.lat, this.home._geoloc.lng);
     },
-    created() {
-        const home = homes.find((home) => home.objectID == this.$route.params.id);
-        this.home = home;
+    async asyncData({params, $dataApi, error}) {
+        const responses = await Promise.all([
+            $dataApi.getHome(params.id),
+            $dataApi.getReviewsByHomeId(params.id),
+            $dataApi.getUsersByHomeId(params.id),
+        ])
+
+        const badResponse = responses.find((response) => !response.ok);
+        if(badResponse) return error({statusCode: badResponse.status, message: badResponse.statusText})
+
+        return {
+            home: responses[0].json,
+            reviews: responses[1].json.hits,
+            user: responses[2].json.hits[0],
+        };
+    },
+    methods: {
+        formateDate(dateStr) {
+            const date = new Date(dateStr);
+            return date.toLocaleDateString(undefined, {month: 'long', year: 'numeric'});
+        }
     }
 }
 </script>
