@@ -4,6 +4,9 @@
         "dev": "nuxt"
     },
     "dependencies": {
+        "cookie": "^0.4.1",
+        "google-auth-library": "^7.5.0",
+        "js-cookie": "^3.0.0",
         "nuxt": "^2.15.7"
     },
     "devDependencies": {

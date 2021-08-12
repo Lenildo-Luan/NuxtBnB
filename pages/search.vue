@@ -24,7 +24,7 @@ export default {
             this.$maps.showMap(this.$refs.map, this.lat, this.lng, this.getHomeMarkers());
         },
         getHomeMarkers() {
-            if(this.homes.length ==0) return null
+            if(this.homes.length == 0) return null
             return this.homes.map((home) => {
                 return {
                     ...home._geoloc,

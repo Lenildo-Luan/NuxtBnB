@@ -1,6 +1,8 @@
-export default function(context, inject) {
-    const appId = 'D74IZ5NQVK';
-    const apiKey = 'ae23788cf7f8585ffaa21c440599ed40';
+import { unWrap, getErrorResponse } from '~/utils/fetchUtils'
+
+export default function({ $config }, inject) {
+    const appId = $config.algolia.appId;
+    const apiKey = $config.algolia.key;
     const headers = {
         'X-Algolia-API-Key': apiKey,
         'X-Algolia-Application-Id': appId,
@@ -68,26 +70,6 @@ export default function(context, inject) {
             }));
         } catch (error) {
             return getErrorResponse(error);
-        }
-    }
-
-    async function unWrap(response) {
-        const json = await response.json();
-        const { ok, status, statusText } = response;
-        return {
-            json,
-            ok,
-            status,
-            statusText,
-        }
-    }
-
-    function getErrorResponse(error) {
-        return {
-            json: {},
-            ok: false,
-            status: 500,
-            statusText: error.message,
         }
     }
 }
