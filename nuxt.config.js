@@ -29,7 +29,7 @@ export default {
     },
     publicRuntimeConfig: {
         auth: {
-            coockieName: 'idToken',
+            cookieName: 'idToken',
             clientId: '903056046126-503c0nqj5viam4imi9ttlbv4dugttk85.apps.googleusercontent.com',
         },
         algolia: {

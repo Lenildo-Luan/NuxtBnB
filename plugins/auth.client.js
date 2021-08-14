@@ -39,11 +39,11 @@ export default ({ $config, store }, inject) => {
 
         const idToken = user.getAuthResponse().id_token;
         Cookie.set($config.auth.cookieName, idToken, { expires: 1 / 24, sameSite: 'Lax' });
+        console.log($config.auth.cookieName);
 
         try {
             const response = await unWrap(await fetch('/api/user'));
             const user = response.json;
-            console.log(user.image)
 
             store.commit('auth/user', {
                 fullName: user.name,
