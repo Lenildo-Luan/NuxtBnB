@@ -19,9 +19,16 @@ export default {
         '~/plugins/maps.client', 
         '~/plugins/dataApi', 
         '~/plugins/auth.client', 
-        '~/plugins/vCalendar.client'
+        '~/plugins/vCalendar.client',
+        '~/plugins/stripe.client',
     ],
-    modules:['~/modules/auth', '~/modules/algolia', '~/modules/cloudinary', '@nuxtjs/cloudinary'],
+    modules:[
+        '~/modules/auth', 
+        '~/modules/algolia', 
+        '~/modules/cloudinary', 
+        '@nuxtjs/cloudinary',
+        '~/modules/stripe',
+    ],
     buildModules:['@nuxtjs/tailwindcss', '@nuxt/image'],
     cloudinary:{
         cloudName: 'dzxztzdg4',
@@ -49,7 +56,10 @@ export default {
         },
         cloudinary:{
             apiKey: '751854148899179',
-        }
+        },
+        stripe:{
+            key: "pk_test_51IszI9HmBUTGMpy8hzjcu1w4uTUubuj4s3lECfzQtJ1EInR5w7oVXltvVck4GWBsX5AWOkPLKV0LWeeS30kZoYXr003sNXOxbF",
+        },
     },
     privateRuntimeConfig:{
         algolia:{
@@ -58,7 +68,10 @@ export default {
         },
         cloudinary:{
             apiSecret: 'Hner5MurgYTJLMQQ9F36P8msRN0',
-        }
+        },
+        stripe:{
+            secretKey: process.env.STRIPE_SECRET_KEY,
+        },
     },
 
 }
