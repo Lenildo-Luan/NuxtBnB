@@ -15,9 +15,22 @@ export default {
     router: {
         prefetchLinks: false,
     },
-    plugins:[ '~/plugins/maps.client', '~/plugins/dataApi', '~/plugins/auth.client' ],
-    modules:['~/modules/auth', '~/modules/algolia'],
-    buildModules:['@nuxtjs/tailwindcss'],
+    plugins:[ 
+        '~/plugins/maps.client', 
+        '~/plugins/dataApi', 
+        '~/plugins/auth.client', 
+        '~/plugins/vCalendar.client'
+    ],
+    modules:['~/modules/auth', '~/modules/algolia', '~/modules/cloudinary', '@nuxtjs/cloudinary'],
+    buildModules:['@nuxtjs/tailwindcss', '@nuxt/image'],
+    cloudinary:{
+        cloudName: 'dzxztzdg4',
+    },
+    image: {
+        cloudinary: {
+          baseURL: 'https://res.cloudinary.com/dzxztzdg4/image/upload/'
+        }
+    },
     css: ['~/assets/sass/app.scss'],
     build: {
         extractCSS: true,
@@ -33,12 +46,18 @@ export default {
         algolia:{
             appId: 'QXGX8RCAML',
             key:'f0ecada6cb5d32e6496eb1e42c3d7bbd',
+        },
+        cloudinary:{
+            apiKey: '751854148899179',
         }
     },
     privateRuntimeConfig:{
         algolia:{
             appId: 'QXGX8RCAML',
             key: '739175c49753db77b422766b417678b1',
+        },
+        cloudinary:{
+            apiSecret: 'Hner5MurgYTJLMQQ9F36P8msRN0',
         }
     },
 
