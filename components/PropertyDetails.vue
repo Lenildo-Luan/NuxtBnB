@@ -33,6 +33,7 @@
 </template>
 <script>
 import pluralize from '~/utils/pluralize'
+
 export default {
     props:{
         home: {

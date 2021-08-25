@@ -1,19 +1,20 @@
 {
-    "name": "mastering-nuxt",
-    "scripts": {
-        "dev": "nuxt"
-    },
-    "dependencies": {
-        "body-parser": "^1.19.0",
-        "cookie": "^0.4.1",
-        "google-auth-library": "^7.5.0",
-        "js-cookie": "^3.0.0",
-        "nuxt": "^2.15.7"
-    },
-    "devDependencies": {
-        "@nuxtjs/tailwindcss": "^4.2.1",
-        "postcss": "^8.3.6",
-        "sass": "^1.37.5",
-        "sass-loader": "^10"
-    }
+  "name": "mastering-nuxt",
+  "dependencies": {
+    "body-parser": "1.19.0",
+    "cookie": "0.4.1",
+    "google-auth-library": "7.0.2",
+    "js-cookie": "2.2.1",
+    "nuxt": "2.14.7"
+  },
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start"
+  },
+  "devDependencies": {
+    "@nuxtjs/tailwindcss": "3.4.2",
+    "sass": "1.32.5",
+    "sass-loader": "10.1.1"
+  }
 }

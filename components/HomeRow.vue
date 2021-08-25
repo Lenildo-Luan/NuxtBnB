@@ -23,14 +23,14 @@
       </div>
     </div>
   </div>
-</div> 
-</template>
+</div>
 
+</template>
 <script>
 import pluralize from '~/utils/pluralize'
 
-export default {
-    props: {
+ export default {
+    props:{
         home: {
             type: Object,
             required: true
@@ -42,7 +42,7 @@ export default {
         }
     },
     methods: {
-        pluralize,
+        pluralize,        
     }
 }
 </script>

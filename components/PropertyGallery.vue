@@ -20,5 +20,4 @@ export default {
         }
     }
 }
-</script> 
- 5  pages/home/_id.vue 
+</script>

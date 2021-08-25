@@ -5,26 +5,26 @@ import { unWrap, getErrorResponse } from '../../../utils/fetchUtils'
 export default (algoliaConfig) => {
     const headers = getHeaders(algoliaConfig)
     return {
-        create: async(identity, payload) => {
+        create: async (identity, payload) => {
             try {
                 return unWrap(await fetch(`https://${algoliaConfig.appId}-dsn.algolia.net/1/indexes/users/${identity.id}`, {
                     headers,
                     method: 'PUT',
                     body: JSON.stringify(payload),
                 }))
-            } catch (error) {
+            } catch(error){
                 return getErrorResponse(error)
             }
         },
-        getById: async(identity) => {
+        getById: async (identity) => {
             try {
                 return unWrap(await fetch(`https://${algoliaConfig.appId}-dsn.algolia.net/1/indexes/users/${identity.id}`, {
-                    headers,
+                    headers,               
                 }))
-            } catch (error) {
+            } catch(error){
                 return getErrorResponse(error)
             }
         }
-
+    
     }
 }

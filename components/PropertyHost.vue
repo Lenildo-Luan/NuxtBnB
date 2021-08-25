@@ -20,6 +20,7 @@
 
 <script>
 import shortDate from '~/utils/shortDate'
+
 export default {
     props: {
         user:{

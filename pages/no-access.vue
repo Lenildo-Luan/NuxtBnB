@@ -1,3 +1,3 @@
 <template>
-    <div>No Access! Login!</div>
+<div>No Access!  Log in!</div>
 </template>
