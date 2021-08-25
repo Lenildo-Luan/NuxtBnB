@@ -1,7 +1,7 @@
-export default function(context, inject){
+export default function(context, inject) {
     let isLoaded = false
     let waiting = []
-    
+
     addScript()
     inject('maps', {
         showMap,
@@ -9,27 +9,27 @@ export default function(context, inject){
     })
 
 
-    function addScript(){
+    function addScript() {
         const script = document.createElement('script')
-        script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCsKXrZB1kSA-Xw4FqmqhDNNHhP__Homtw&libraries=places&callback=initGoogleMaps"
+        script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDRymAkEgVsj3FmwRgLQC90tQ5bVTa_umI&libraries=places&callback=initGoogleMaps"
         script.async = true
         window.initGoogleMaps = initGoogleMaps
         document.head.appendChild(script)
     }
 
-    function initGoogleMaps(){
-        isLoaded =  true
+    function initGoogleMaps() {
+        isLoaded = true
         waiting.forEach((item) => {
-            if(typeof item.fn === 'function'){
+            if (typeof item.fn === 'function') {
                 item.fn(...item.arguments)
             }
         })
         waiting = []
     }
 
-    function makeAutoComplete(input, types = ['(cities)']){
-        if(!isLoaded){
-            waiting.push({ fn: makeAutoComplete, arguments})
+    function makeAutoComplete(input, types = ['(cities)']) {
+        if (!isLoaded) {
+            waiting.push({ fn: makeAutoComplete, arguments })
             return
         }
 
@@ -40,8 +40,8 @@ export default function(context, inject){
         })
     }
 
-    function showMap(canvas, lat, lng, markers){
-        if(!isLoaded){
+    function showMap(canvas, lat, lng, markers) {
+        if (!isLoaded) {
             waiting.push({
                 fn: showMap,
                 arguments,
@@ -53,16 +53,16 @@ export default function(context, inject){
             center: new window.google.maps.LatLng(lat, lng),
             disableDefaultUI: true,
             zoomControl: true,
-            styles:[{
+            styles: [{
                 featureType: 'poi.business',
                 elementType: 'labels.icon',
-                stylers:[{ visibility: 'off' }]
+                stylers: [{ visibility: 'off' }]
             }]
         }
         const map = new window.google.maps.Map(canvas, mapOptions)
-        if(!markers){
+        if (!markers) {
             const position = new window.google.maps.LatLng(lat, lng)
-            const marker = new window.google.maps.Marker({ 
+            const marker = new window.google.maps.Marker({
                 position,
                 clickable: false,
             })
@@ -73,7 +73,7 @@ export default function(context, inject){
         const bounds = new window.google.maps.LatLngBounds()
         markers.forEach((home) => {
             const position = new window.google.maps.LatLng(home.lat, home.lng)
-            const marker = new window.google.maps.Marker({ 
+            const marker = new window.google.maps.Marker({
                 position,
                 label: {
                     text: `$${home.pricePerNight}`,
@@ -87,6 +87,6 @@ export default function(context, inject){
         })
 
         map.fitBounds(bounds)
-        
+
     }
 }
