@@ -25,11 +25,13 @@ export default function() {
 
     async function createSession(req, res) {
         const body = req.body
-        if (!body || !body.homeId || !body.start || !body.end || !body.start >= body.end) {
+
+        if (!body || !body.home || !body.start || !body.end || !body.start >= body.end) {
             return rejectHitBadRequest(res)
         }
 
-        const home = (await apis.homes.get(body.homeId)).json
+        const home = body.home
+        console.log(home)
         const nights = (body.end - body.start) / 86400
         const session = await stripe.checkout.sessions.create({
             metadata: {
@@ -40,8 +42,8 @@ export default function() {
             },
             payment_method_types: ['card'],
             mode: 'payment',
-            success_url: `${rootUrl}/home/${body.homeId}?result=success`,
-            cancel_url: `${rootUrl}/home/${body.homeId}`,
+            success_url: `${rootUrl}/home/${home.objectID}?result=success`,
+            cancel_url: `${rootUrl}/home/${home.objectID}`,
             line_items: [{
                 quantity: 1,
                 price_data: {

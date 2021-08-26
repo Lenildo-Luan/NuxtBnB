@@ -1,6 +1,6 @@
 import { unWrap, getErrorResponse } from '~/utils/fetchUtils'
 
-export default function({ $config }, inject){   
+export default function({ $config }, inject) {
     const headers = {
         'X-Algolia-API-Key': $config.algolia.key,
         'X-Algolia-Application-Id': $config.algolia.appId,
@@ -13,15 +13,16 @@ export default function({ $config }, inject){
         getHomes,
     })
 
-    async function getHome(homeId){
+    async function getHome(homeId) {
         try {
-        return unWrap(await fetch(`https://${$config.algolia.appId}-dsn.algolia.net/1/indexes/homes/${homeId}`, { headers }))        
-        } catch(error){
+            console.log(headers)
+            return unWrap(await fetch(`https://${$config.algolia.appId}-dsn.algolia.net/1/indexes/homes/${homeId}`, { headers }))
+        } catch (error) {
             return getErrorResponse(error)
         }
     }
 
-    async function getReviewsByHomeId(homeId){
+    async function getReviewsByHomeId(homeId) {
         try {
             return unWrap(await fetch(`https://${$config.algolia.appId}-dsn.algolia.net/1/indexes/reviews/query`, {
                 headers,
@@ -32,31 +33,31 @@ export default function({ $config }, inject){
                     attributesToHighlight: [],
                 })
             }))
-        } catch(error){
+        } catch (error) {
             return getErrorResponse(error)
         }
     }
 
-    async function getUserByHomeId(homeId){
+    async function getUserByHomeId(homeId) {
         try {
             return unWrap(await fetch(`https://${$config.algolia.appId}-dsn.algolia.net/1/indexes/users/query`, {
                 headers,
                 method: 'POST',
                 body: JSON.stringify({
-                    filters: `homeId:${homeId}`,                    
+                    filters: `homeId:${homeId}`,
                     attributesToHighlight: [],
                 })
             }))
-        } catch(error){
+        } catch (error) {
             return getErrorResponse(error)
         }
     }
 
-    async function getHomesByLocation(lat, lng, start, end, radiusInMeters = 1500 * 15){
+    async function getHomesByLocation(lat, lng, start, end, radiusInMeters = 1500 * 15) {
         try {
             const days = []
 
-            for(var day = parseInt(start);day <= parseInt(end); day += 86400){
+            for (var day = parseInt(start); day <= parseInt(end); day += 86400) {
                 days.push(`availability:${day}`)
             }
             return unWrap(await fetch(`https://${$config.algolia.appId}-dsn.algolia.net/1/indexes/homes/query`, {
@@ -70,21 +71,21 @@ export default function({ $config }, inject){
                     attributesToHighlight: [],
                 })
             }))
-        } catch(error){
+        } catch (error) {
             return getErrorResponse(error)
         }
     }
-    async function getHomes(){
+    async function getHomes() {
         try {
             return unWrap(await fetch(`https://${$config.algolia.appId}-dsn.algolia.net/1/indexes/homes/query`, {
                 headers,
                 method: 'POST',
-                body: JSON.stringify({                    
+                body: JSON.stringify({
                     hitsPerPage: 3,
                     attributesToHighlight: [],
                 })
             }))
-        } catch(error){
+        } catch (error) {
             return getErrorResponse(error)
         }
     }

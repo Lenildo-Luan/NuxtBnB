@@ -3,7 +3,7 @@ import userRouter from './routers/user'
 import homesRouter from './routers/homes'
 import getApis from './apis'
 
-export default function(){
+export default function() {
     const algoliaConfig = this.options.privateRuntimeConfig.algolia
     const apis = getApis(algoliaConfig)
 
