@@ -46,7 +46,7 @@ export default {
         }
     },
     publicRuntimeConfig: {
-        rootUrl: process.env.NODE_ENV === 'production' ? 'https://nuxtbnb.com' : 'http://localhost:3000',
+        rootUrl: process.env.NODE_ENV === 'production' ? 'https://nuxtbnb-ten.vercel.app' : 'http://localhost:3000',
         auth: {
             cookieName: 'idToken',
             clientId: '903056046126-503c0nqj5viam4imi9ttlbv4dugttk85.apps.googleusercontent.com',
